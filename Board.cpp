@@ -19,7 +19,7 @@ Board::Board()
 	{
 		for(int count2 = 0; count2 < col; count2++)
 		{
-			board[count][count2] = 'X'; //This should print a space in the future
+			board[count][count2] = ' '; //This should print a space in the future
 		}
 	}
 
@@ -28,13 +28,29 @@ Board::Board()
 //This will print the board
 void Board::printBoard()
 {
-    for(int count = 0; count < row; count++)
+    for(int count = -1; count < row + 1; count++)
     {
-        for(int count2 = 0; count2 < col; count2++)
+        std::cout << '|'; //left border
+        for(int count2 =  0; count2 < col; count2++)
         {
-            std::cout << board[count][count2] << ' ';
+            if((count != -1) && (count != row)) //This is to allow for a top and bottom border
+            {
+                std::cout << board[count][count2];
+
+                //This if statement allows for the right border to not have a space
+                if(count2 < (col - 1))
+                {
+                    std::cout << ' '; 
+                }
+            }
+
+            else //This will add a dash at the top and bottom of the array
+            {
+                std::cout << '-' << ' ';
+            }
         }
-        std::cout<<std::endl;
+        std::cout << '|'; //right border
+        std::cout<<std::endl; //Starting a new line for each row
     }
 }
 
