@@ -1,5 +1,6 @@
 #include "Board.hpp"
 
+//Default constructor that fills the array to 20x20
 Board::Board()
 {
     row = 20; //By default
@@ -18,8 +19,30 @@ Board::Board()
     {
         for(int count2 = 0; count2 < col; ++count2);
         {
-            board[row][col] = 'X';
+            board[row][col] = 'X'; //This would normally be the space character
         }
     }
 
+}
+
+//This will print the board
+void Board::printBoard()
+{
+    for(int count = 0; count < row; ++count)
+    {
+        for(int count2 = 0; count2 < col; ++count2)
+        {
+            std::cout << board[row][col] << std::endl;
+        }
+    }
+}
+
+//This will delete the dynamic array
+void Board::deleteArray()
+{
+    for(int count = 0; count < row; ++count)
+    {
+        delete [] board[count];
+    }
+    delete [] board;
 }
