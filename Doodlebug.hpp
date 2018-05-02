@@ -6,5 +6,6 @@ class Doodlebug : public Critter
 {
     private:
     public:
+        void Move() override;
 };
 #endif
