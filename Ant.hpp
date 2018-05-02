@@ -10,8 +10,8 @@ class Ant : public Critter
         char gameBoardCharacter = 'O'; //The ant will have this space in the game
     public:
         Ant(); //Empty constructor
-        void Move() override;
+        virtual void Move();
         void Breed();       //When the ant breeds
-        char getCharacter() //Gets the character for the board
+        char getCharacter(); //Gets the character for the board
 };
 #endif
