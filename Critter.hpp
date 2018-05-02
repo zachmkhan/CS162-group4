@@ -3,6 +3,8 @@
 
 class Critter
 {
-    //blank
+    protected:
+    public:
+        virtual void Move() = 0;
 };
 #endif
