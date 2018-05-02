@@ -1,4 +1,10 @@
+#include <iostream>
+#include "Board.hpp"
+
 int main()
 {
-    //blank
+    //I am just testing with these below
+    Board board;
+    board.printBoard();
+    board.deleteArray();
 }
