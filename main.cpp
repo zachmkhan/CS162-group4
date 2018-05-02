@@ -7,5 +7,6 @@ int main()
     Board board;
     board.printBoard();
     board.placeRandom();
+    board.printBoard();
     board.deleteArray();
 }

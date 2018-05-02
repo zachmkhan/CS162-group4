@@ -1,5 +1,5 @@
-output: main.o Validate.o Ant.o Board.o Critter.o 
-	g++ main.o Validate.o Ant.o Board.o Critter.o -o output
+output: main.o Validate.o Ant.o Board.o Critter.o Doodlebug.o 
+	g++ main.o Validate.o Ant.o Board.o Critter.o Doodlebug.o -o output
 
 CXX = g++
 CXXFLAGS = -std=c++0x
