@@ -87,8 +87,9 @@ void Board::placeRandom()
                 }
 
                 //If the space can be occupied by a critter
-    			if(board[count][count2] != 'O' || board[count][count2] != 'X')
+    			if(board[count][count2] != 'O' && board[count][count2] != 'X')
                 {
+                    doodle--; //subtracting a doodlebug
                     doodleFlag = false;
                     board[count][count2] = 'X'; //setting the space as a doodlebug
 
@@ -96,6 +97,7 @@ void Board::placeRandom()
                 else //The space is occupied
                 {
                     //I will need to call the class to get a new random location
+                    break;
                 }
             }
 		}
@@ -122,8 +124,9 @@ void Board::placeRandom()
                 }
 
                 //If the space can be occupied by a critter
-    			if(board[count][count2] != 'O' || board[count][count2] != 'X')
+    			if(board[count][count2] != 'O' && board[count][count2] != 'X')
                 {
+                    ant--; //Subtracting an ant;
                     antFlag = false;
                     board[count][count2] = 'O'; //Setting the space as an ant
 
@@ -131,6 +134,7 @@ void Board::placeRandom()
                 else //The space is occupied
                 {
                     //I will need to call the class to get a new random location
+                    break;
                 }
             }
 		}
