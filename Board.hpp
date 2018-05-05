@@ -5,7 +5,7 @@
 class Board
 {
     private:
-        char ** board; //This will be used to dynamically allocate the array
+        Critter *** board; //This will be used to dynamically allocate the array
         int row; //The number of rows (Y value)
         int col; //The number of cols (X value)
         int ant; //The number of ants
