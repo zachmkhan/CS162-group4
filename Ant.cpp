@@ -1,4 +1,6 @@
 #include "Ant.hpp"
+#include <ctime>					// For time()
+#include <cstdlib>					// For srand() and rand()
 
 //Default constructor
 Ant::Ant()
