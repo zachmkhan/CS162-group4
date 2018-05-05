@@ -10,8 +10,9 @@ class Doodlebug : public Critter
         char gameBoardCharacter = 'X'; //The doodlebug will have this space in the game
     public:
         Doodlebug(); //Empty constructor
-        virtual void Move(); //Virtual function
+        virtual void Move(Critter *** board, int row, int col); //Virtual function
         void Breed();       //When the ant breeds
-        char getCharacter(); //Gets the character for the board
+        
+        //char getCharacter(); //Gets the character for the board
 };
 #endif
