@@ -48,7 +48,6 @@ void Doodlebug::Move(Critter *** board,int row, int col)
 	else
 	{
 		int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
-		bool moved = true;
 
 		switch (randomMove)
 		{
