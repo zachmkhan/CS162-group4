@@ -4,6 +4,9 @@
 class Critter
 {
     protected:
+        int xLocation;
+        int yLocation;
+        char gameBoardCharacter;
     public:
         virtual void Move() = 0;
 };
