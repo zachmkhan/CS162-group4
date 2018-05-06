@@ -3,7 +3,7 @@
 #include <cstdlib>					// For srand() and rand()
 #include "Critter.hpp"
 
-Doodlebug::Doodlebug(int x, int y, Critter*** board) : Critter('X', x, y, board)
+Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X', x, y, r, c, board)
 {
  
 }
@@ -19,7 +19,7 @@ void Doodlebug::step()
 	//starve
 }
 
-void Doodlebug::Move(int row, int col)
+void Doodlebug::Move()
 {
 	//Tries to go up to eat an ant
 	if (board[xLocation][yLocation + 1]->getCritterType() == 'O')
@@ -109,7 +109,7 @@ void Doodlebug::Move(int row, int col)
 /**********************************************************************************************************
 ** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
 **********************************************************************************************************/
-void Doodlebug::Breed(int row, int col)
+void Doodlebug::Breed()
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
 	// bool bred = true;

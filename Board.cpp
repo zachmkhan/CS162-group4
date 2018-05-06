@@ -119,7 +119,7 @@ void Board::placeRandom()
             randomCol = randomBetween(0, col-1);
         }while(board[randomRow][randomCol] != nullptr); //nullprt means no critter is located at that coordinate
         
-        board[randomRow][randomCol] = new Ant(randomRow, randomCol, board);
+        board[randomRow][randomCol] = new Ant(randomRow, randomCol, row, col, board);
     }
     
     // Place all the initial doodlebugs at random locations
@@ -134,7 +134,7 @@ void Board::placeRandom()
             randomCol = randomBetween(1, col) - 1;
         }while(board[randomRow][randomCol] != nullptr); //nullprt means no critter is located at that coordinate
         
-        board[randomRow][randomCol] = new Doodlebug(randomRow, randomCol, board);
+        board[randomRow][randomCol] = new Doodlebug(randomRow, randomCol, row, col, board);
     }
 }
 

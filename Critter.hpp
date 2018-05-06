@@ -8,9 +8,11 @@ class Critter
         int yLocation;
         int stepsSinceEating;
         char gameBoardCharacter;
+        int row;
+        int col;
         Critter*** board;
     public:
-        Critter(char, int, int, Critter***);
+        Critter(char, int, int, int, int, Critter***);
 		char getCritterType();
 		int getStepsSinceEating();
 		void setCritterType(char);

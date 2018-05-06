@@ -9,7 +9,7 @@
  *	 y: starting y coordinate for new ant
  *	 board: pointer the the game board
  */
-Ant::Ant(int x, int y, Critter*** board) : Critter('O', x, y, board)
+Ant::Ant(int x, int y,int r, int c, Critter*** board) : Critter('O', x, y, r, c, board)
 {
     stepsSinceBreeding = 0;
 }
@@ -25,7 +25,7 @@ void Ant::step()
 }
 
 //Virtual function
-void Ant::Move(int row, int col)
+void Ant::Move()
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
 
@@ -88,7 +88,7 @@ void Ant::Move(int row, int col)
 /**********************************************************************************************************
 ** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
 **********************************************************************************************************/
-void Ant::Breed(int row, int col)
+void Ant::Breed()
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
 	bool bred = true;
