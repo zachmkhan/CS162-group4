@@ -21,36 +21,36 @@ void Doodlebug::step()
 void Doodlebug::Move()
 {
 	//Tries to go up to eat an ant
-	if (board[xLocation][yLocation + 1]->getCritterType() == 'O')
+	if (yLocation < row - 1 && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
 	{
-        board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
+        board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		yLocation += 1;								//The Doodlebug moves up
 	}
 	//Tries to go down to eat an ant
-	else if (board[xLocation][yLocation - 1]->getCritterType() == 'O')
+	else if (yLocation > 0 && board[xLocation][yLocation - 1] != nullptr && board[xLocation][yLocation - 1]->getCritterType() == 'O')
 	{
-		board[xLocation][yLocation] = board[xLocation][yLocation - 1];		//The Doodlebug moves to the new space
+		board[xLocation][yLocation - 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		yLocation -= 1;								//The Doodlebug moves down
 	}
 	//Tries to go right to eat an ant
-	else if (board[xLocation + 1][yLocation]->getCritterType() == 'O')
+	else if (xLocation < col - 1 && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
 	{
-		board[xLocation][yLocation] = board[xLocation + 1][yLocation];		//The Doodlebug moves to the new space
+		board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		xLocation += 1;								//The Doodlebug moves right
 	}
 	//Tries to go up to left an ant
-	else if (board[xLocation - 1][yLocation]->getCritterType() == 'O')
+	else if (xLocation > 0 && board[xLocation - 1][yLocation] != nullptr && board[xLocation - 1][yLocation]->getCritterType() == 'O')
 	{
-		board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
+		board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
@@ -66,7 +66,7 @@ void Doodlebug::Move()
 		case 1:
 			if (yLocation < row && board[xLocation][yLocation + 1] == nullptr)
 			{
-				board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
+				board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
 
 				yLocation += 1;														//The Doodlebug moves up
@@ -76,27 +76,27 @@ void Doodlebug::Move()
 		case 2:
 			if (yLocation > 0 && board[xLocation][yLocation - 1] == nullptr)
 			{
-				board[xLocation][yLocation] = board[xLocation][yLocation - 1];		//The Doodlebug moves to the new space
+				board[xLocation][yLocation - 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
-				yLocation -= 1;														//The Doodlebug moves up
+				yLocation -= 1;														//The Doodlebug moves down
 			}
 			break;
 		//Moving Right
 		case 3:
 			if (xLocation < col && board[xLocation + 1][yLocation] == nullptr)
 			{
-				board[xLocation][yLocation] = board[xLocation + 1][yLocation];		//The Doodlebug moves to the new space
+				board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
-				xLocation += 1;														//The Doodlebug moves up
+				xLocation += 1;														//The Doodlebug moves right
 			}
 			break;
 		//Moving Left
 		case 4:
 			if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
 			{
-				board[xLocation][yLocation] = board[xLocation - 1][yLocation];		//The Doodlebug moves to the new space
+				board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
-				xLocation -= 1;														//The Doodlebug moves up
+				xLocation -= 1;														//The Doodlebug moves left
 			}
 			break;
 		}
