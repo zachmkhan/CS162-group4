@@ -28,7 +28,6 @@ void Ant::step()
 void Ant::Move(int row, int col)
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
-	bool moved = true;
 
 	switch (randomMove)
 	{
