@@ -9,6 +9,10 @@ private:
     int stepsSinceEating; //steps since eating
     int stepsNeededToBreed = 8; //Doodlebug will breeed every 8 steps
     char gameBoardCharacter = 'X'; //The doodlebug will have this space in the game
+    bool breedLeft();
+    bool breedRight();
+    bool breedUp();
+    bool breedDown();
 
 public:
     Doodlebug(int, int, int, int, Critter***); //Empty constructor

@@ -3,6 +3,7 @@
 #include <cstdlib>					// For srand() and rand()
 #include "Critter.hpp"
 #include <iostream>
+#include "util.hpp"
 
 Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X', x, y, r, c, board)
 {
@@ -15,7 +16,7 @@ Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X'
 void Doodlebug::step()
 {
 	Move();
-	// Breed();
+	Breed();
 	Starve();
 }
 
@@ -110,52 +111,77 @@ void Doodlebug::Move()
 	}
 }
 
+bool Doodlebug::breedUp()
+{
+	if(yLocation + 1 < col || board[xLocation][yLocation + 1] != nullptr)
+	{
+		return false;
+	}
+	
+	board[xLocation][yLocation + 1] = new Doodlebug(xLocation , yLocation + 1, row, col, board);
+	return true;
+}
+
+bool Doodlebug::breedDown()
+{
+	if(yLocation - 1 >= 0 || board[xLocation][yLocation - 1] != nullptr)
+	{
+		return false;
+	}
+	board[xLocation][yLocation - 1] = new Doodlebug(xLocation, yLocation - 1, row, col, board);
+	return true;
+}
+
+bool Doodlebug::breedLeft()
+{
+	if((xLocation - 1) < 0 || board[xLocation - 1][yLocation] != nullptr)
+	{
+		return false;
+	}
+
+	board[xLocation - 1][yLocation] = new Doodlebug(xLocation - 1, yLocation, row, col, board);
+	return true;
+}
+
+bool Doodlebug::breedRight()
+{
+	if(xLocation + 1 >= row || board[xLocation + 1][yLocation] != nullptr)
+	{
+		return false;
+	}
+	
+	board[xLocation + 1][yLocation] = new Doodlebug(xLocation + 1, yLocation, row, col, board);
+	return true;
+}
+
+
 /**********************************************************************************************************
 ** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
 **********************************************************************************************************/
 void Doodlebug::Breed()
 {
-	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
-	// bool bred = true;
-
-	switch (randomMove)
+	if(stepsSinceBreeding > 8)
 	{
-		//Breeding Up
-	case 1:
-		if (yLocation < row && board[xLocation][yLocation + 1] == nullptr)
-		{
-			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
-			board[xLocation][yLocation + 1]->setCritterType('O');		//Set critter type to O for new doodlebug
-		}
-		break;
-		//Breeding Down
-	case 2:
-		if (yLocation > 0 && board[xLocation][yLocation - 1] == nullptr)
-		{
-			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
+		int randomMove = randomBetween(1, 4);										//Random number for the 4 different directions
 
-			board[xLocation][yLocation - 1]->setCritterType('O');		//Set critter type to O for new doodlebug
-		}
-		break;
-		//Breeding Right
-	case 3:
-
-		if (xLocation < col && board[xLocation + 1][yLocation] == nullptr)
+		switch (randomMove)
 		{
-			// need to change the location to Doodle bug by changing pointer to critter, not sure how yet
-			board[xLocation + 1][yLocation]->setCritterType('O');		//Set critter type to O for new doodlebug
+			case 1:
+				breedUp() || breedDown() || breedLeft() || breedRight();
+				break;
+			case 2:
+				breedDown() || breedLeft() || breedRight() || breedUp();
+				break;
+			case 3:
+				breedLeft() || breedRight() || breedUp() || breedDown();
+				break;
+			case 4:
+				breedRight() || breedUp() || breedDown() || breedLeft();
+				break;
 		}
-		break;
-		//Breeding Left
-	case 4:
-
-		if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
-		{
-			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
-			board[xLocation - 1][yLocation]->setCritterType('O');	//Set critter type to O for new doodlebug
-		}
-		break;
+		stepsSinceBreeding = 0;
 	}
+	
 }
 
 /**********************************************************************************************************

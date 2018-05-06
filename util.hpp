@@ -1,3 +1,6 @@
+#include <string>
+#ifndef UTIL_HPP
+#define UTIL_HPP
 
 int randomBetween(int low, int high);
 bool validIntInput();
@@ -10,3 +13,4 @@ bool getBooleanInput(std::string prompt);
 std::string getStringInput(std::string prompt);
 double getNumericInputInRange(std::string prompt, int start, int end);
 
+#endif

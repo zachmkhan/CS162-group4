@@ -16,7 +16,7 @@ class Critter
 		char getCritterType();
 		int getStepsSinceEating();
 		void setCritterType(char);
-        virtual void Move(int row, int col) = 0;
+        virtual void Move() = 0;
         virtual void step() = 0;
 };
 
