@@ -20,7 +20,7 @@ Ant::Ant(int x, int y,int r, int c, Critter*** board) : Critter('O', x, y, r, c,
 void Ant::step()
 {
 	Move();
-	// Breed();
+	Breed();
 }
 
 //Virtual function
