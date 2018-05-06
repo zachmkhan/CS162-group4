@@ -18,6 +18,10 @@ void Doodlebug::step()
 	Starve();
 }
 
+/*
+ * Makes the Doodlebug try to eat an ant that is directly next to it. If there are no ants next to it
+ * the Doodlebug will randomly try to move to another space. If it fails to move the first try, then the Doodlebug does not move. 
+ */
 void Doodlebug::Move()
 {
 	//Tries to go up to eat an ant
