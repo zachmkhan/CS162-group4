@@ -9,3 +9,8 @@ void Critter::setCritterType(char typeChar)
 {
 	gameBoardCharacter = typeChar;
 }
+
+int Critter::getStepsSinceEating()
+{
+    return stepsSinceEating;
+}
