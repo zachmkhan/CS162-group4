@@ -34,8 +34,11 @@ int main()
     	delete critters;
     	
     	//Display the board for each step
-    	cout << "Step " << step << ": " << endl;
+    	cout << "Press enter for step " << step << ": " << endl;
+		cin.ignore();
     	board->printBoard();
+		cout<<endl;
+		cout<<endl;
     }
     
     delete board;
@@ -47,15 +50,16 @@ int main()
 Board* getBoard()
 {
 	//EXTRA CREDIT
-	bool customizeGame = getBooleanInput("Would you like to choose the board size, number of Ants and number of doodle bugs? [y/n] ");
+	cout << "Press y for the extra credit portion of the project" << endl;
+	bool customizeGame = getBooleanInput("Would you like to choose the board size, number of Ants and number of doodle bugs? [y/n]");
 	if(customizeGame)
 	{
-		int rows = getIntInputInRange("Number of Rows: ", 1, 100);
-		int cols = getIntInputInRange("Number of Columns: ", 1, 100);
+		int rows = getIntInputInRange("Number of Rows: ", 2, 100);
+		int cols = getIntInputInRange("Number of Columns: ", 2, 100);
 		
 		//Number of ants cannot be greater than slots on board
 		int numberOfSlots = rows * cols;
-		int ants = getIntInputInRange("Number of Ants: ", 1, numberOfSlots); 
+		int ants = getIntInputInRange("Number of Ants: ", 1, numberOfSlots - 1); 
 		
 		//Number of doodlebugs cannot be greater than slots left on board
 		numberOfSlots -= ants;
