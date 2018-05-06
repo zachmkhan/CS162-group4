@@ -23,7 +23,9 @@ void Ant::step()
 	Breed();
 }
 
-//Virtual function
+/*
+ * Makes the Ant try to move in a random direction. If it fails to move the first try, then the ant does not move. 
+ */
 void Ant::Move()
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
@@ -33,12 +35,12 @@ void Ant::Move()
 
 		//Moving Up
 	case 1:
-		if (yLocation < row && board[xLocation][yLocation + 1] == nullptr)
+		if (yLocation < row - 1 && board[xLocation][yLocation + 1] == nullptr)
 		{
-			board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
+			board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Ant moves to the new space
 			board[xLocation][yLocation] = nullptr;
 
-			yLocation += 1;														//The Doodlebug moves up
+			yLocation += 1;														//The Ant moves up
 		}
 
 		break;
@@ -47,22 +49,22 @@ void Ant::Move()
 	case 2:
 		if (yLocation > 0 && board[xLocation][yLocation - 1] == nullptr)
 		{
-			board[xLocation][yLocation] = board[xLocation][yLocation - 1];		//The Doodlebug moves to the new space
+			board[xLocation][yLocation-1] = board[xLocation][yLocation];		//The Ant moves to the new space
 			board[xLocation][yLocation] = nullptr;
 
-			yLocation -= 1;														//The Doodlebug moves up
+			yLocation -= 1;														//The Ant moves down
 		}
 
 		break;
 
 		//Moving Right
 	case 3:
-		if (xLocation < col && board[xLocation + 1][yLocation] == nullptr)
+		if (xLocation < col - 1 && board[xLocation + 1][yLocation] == nullptr)
 		{
-			board[xLocation][yLocation] = board[xLocation + 1][yLocation];		//The Doodlebug moves to the new space
+			board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Ant moves to the new space
 			board[xLocation][yLocation] = nullptr;
 
-			xLocation += 1;														//The Doodlebug moves up
+			xLocation += 1;														//The Ant moves right
 		}
 
 		break;
@@ -71,10 +73,10 @@ void Ant::Move()
 	case 4:
 		if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
 		{
-			board[xLocation][yLocation] = board[xLocation - 1][yLocation];		//The Doodlebug moves to the new space
+			board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Ant moves to the new space
 			board[xLocation][yLocation] = nullptr;
 
-			xLocation -= 1;														//The Doodlebug moves up
+			xLocation -= 1;														//The Ant moves left
 		}
 
 		break;
