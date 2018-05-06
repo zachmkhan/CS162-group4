@@ -11,7 +11,7 @@ class Ant : public Critter
     public:
         Ant(); //Empty constructor
         void Move(Critter *** board, int row, int col);
-        void Breed();       //When the ant breeds
+        void Breed(Critter *** board, int row, int col);       //When the ant breeds
         
         //char getCharacter(); //Gets the character for the board
 };

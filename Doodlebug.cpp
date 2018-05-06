@@ -92,7 +92,7 @@ void Doodlebug::Move(Critter *** board,int row, int col)
 		case 4:
 			if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
 			{
-				board[xLocation][yLocation] = board[xLocation 1 1][yLocation];		//The Doodlebug moves to the new space
+				board[xLocation][yLocation] = board[xLocation - 1][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
 
 				xLocation -= 1;														//The Doodlebug moves up
@@ -106,3 +106,61 @@ void Doodlebug::Move(Critter *** board,int row, int col)
 
 	}
 }
+
+/**********************************************************************************************************
+** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
+**********************************************************************************************************/
+
+void Doodlebug::Breed(Critter *** board, int row, int col)
+{
+	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
+	bool bred = true;
+
+	switch (randomMove)
+	{
+
+		//Breeding Up
+	case 1:
+		if (yLocation < row && board[xLocation][yLocation + 1] == nullptr)
+		{
+			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
+			board[xLocation][yLocation + 1]->setCritterType('O');		//Set critter type to O for new doodlebug
+
+		}
+
+		break;
+
+		//Breeding Down
+	case 2:
+		if (yLocation > 0 && board[xLocation][yLocation - 1] == nullptr)
+		{
+			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
+			board[xLocation][yLocation - 1]->setCritterType('O');		//Set critter type to O for new doodlebug
+
+		}
+
+		break;
+
+		//Breeding Right
+	case 3:
+		if (xLocation < col && board[xLocation + 1][yLocation] == nullptr)
+		{
+			// need to change the location to Doodle bug by changing pointer to critter, not sure how yet
+			board[xLocation + 1][yLocation]->setCritterType('O');		//Set critter type to O for new doodlebug
+
+		}
+
+		break;
+
+		//Breeding Left
+	case 4:
+		if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
+		{
+			// need to change the location to Doodlebug by changing pointer to critter, not sure how yet
+			board[xLocation - 1][yLocation]->setCritterType('O');	//Set critter type to O for new doodlebug
+
+		}
+
+		break;
+	}
+

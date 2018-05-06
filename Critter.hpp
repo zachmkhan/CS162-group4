@@ -8,6 +8,8 @@ class Critter
         int yLocation;
         char gameBoardCharacter;
     public:
+		char getCritterType();
+		void setCritterType(char);
         virtual void Move() = 0;
 };
 #endif

@@ -9,22 +9,24 @@ Board::Board()
     doodle = 5; //Default number of doodles
 
     //Creating the 20x20 dynamic 2d array below
-    board = new char * [row];
+    board = new Critter ** [row];
     for(int count = 0; count < row; count++)
     {
-        board[count] = new char[col];
+        board[count] = new Critter*[col];
     }
 
-    //Filling the array below
-    //I am filling the array with the char 'X' for debugging purposes
+    //Setting the critter type chars
+
+	//access violation, not sure how to fill the board with blanks to start.
+	
 	for(int count = 0; count < row; count++)
 	{
 		for(int count2 = 0; count2 < col; count2++)
 		{
-			board[count][count2] = ' '; //This should print a space in the future
+			board[count][count2]->setCritterType(' '); //This should print a space in the future -Felicia
 		}
 	}
-
+	
 }
 
 //This will print the board
@@ -37,7 +39,7 @@ void Board::printBoard()
         {
             if((count != -1) && (count != row)) //This is to allow for a top and bottom border
             {
-                std::cout << board[count][count2];
+                std::cout << board[count][count2]->getCritterType();  //access violation since can't get the board to fill with blanks.  See line 20 -Felicia
 
                 //This if statement allows for the right border to not have a space
                 if(count2 < (col - 1))
@@ -87,11 +89,11 @@ void Board::placeRandom()
                 }
 
                 //If the space can be occupied by a critter
-    			if(board[count][count2] != 'O' && board[count][count2] != 'X')
+    			if(board[count][count2]->getCritterType() != 'O' && board[count][count2]->getCritterType() != 'X')
                 {
                     doodle--; //subtracting a doodlebug
                     doodleFlag = false;
-                    board[count][count2] = 'X'; //setting the space as a doodlebug
+                    board[count][count2]->setCritterType('X'); //setting the space as a doodlebug
 
                 }
                 else //The space is occupied
@@ -124,11 +126,11 @@ void Board::placeRandom()
                 }
 
                 //If the space can be occupied by a critter
-    			if(board[count][count2] != 'O' && board[count][count2] != 'X')
+    			if(board[count][count2]->getCritterType() != 'O' && board[count][count2]->getCritterType() != 'X')
                 {
                     ant--; //Subtracting an ant;
                     antFlag = false;
-                    board[count][count2] = 'O'; //Setting the space as an ant
+                    board[count][count2]->setCritterType('O'); //Setting the space as an ant
 
                 }
                 else //The space is occupied
