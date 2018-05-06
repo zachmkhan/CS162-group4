@@ -19,9 +19,8 @@ Ant::Ant(int x, int y,int r, int c, Critter*** board) : Critter('O', x, y, r, c,
  */
 void Ant::step()
 {
-	//todo
-	//move
-	//breed
+	Move();
+	// Breed();
 }
 
 //Virtual function

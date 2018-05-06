@@ -13,10 +13,9 @@ Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X'
  */
 void Doodlebug::step()
 {
-	//todo
-	//move
-	//breed
-	//starve
+	Move();
+	Breed();
+	Starve();
 }
 
 void Doodlebug::Move()
