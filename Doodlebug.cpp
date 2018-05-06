@@ -2,6 +2,7 @@
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
 #include "Critter.hpp"
+#include <iostream>
 
 Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X', x, y, r, c, board)
 {
@@ -14,7 +15,7 @@ Doodlebug::Doodlebug(int x, int y, int r, int c, Critter*** board) : Critter('X'
 void Doodlebug::step()
 {
 	Move();
-	Breed();
+	// Breed();
 	Starve();
 }
 
@@ -158,22 +159,14 @@ void Doodlebug::Breed()
 }
 
 /**********************************************************************************************************
-** Description: Function runs through the board objects and deletes any Doodlebugs whose StepsSinceEating
-** is equal to 3.
+** Description: Checks if the doddlebug has not eat in three days, if so it removes it from the board.
 **********************************************************************************************************/
 void Doodlebug::Starve()
 {
-    int arraySize = sizeof(board) / sizeof(*board);
-    Critter* ptr;
-    for(int x = 0; x < arraySize; x++)
-    {
-        ptr = *board[x];
+	if(stepsSinceEating >=3)
+	{
+		board[xLocation][yLocation] = NULL;
+		delete this;
+	}
 
-        if(ptr->getCritterType() == 'X' && ptr->getStepsSinceEating() >= 3)
-        {
-            board[x] = nullptr;
-        }
-    }
-
-    delete ptr;
 }
