@@ -2,14 +2,30 @@
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
 
-//Default constructor
-Ant::Ant()
+
+/*
+ * Initialize new ant
+ *	 x: starting x coordinate for the new ant
+ *	 y: starting y coordinate for new ant
+ *	 board: pointer the the game board
+ */
+Ant::Ant(int x, int y, Critter*** board) : Critter('O', x, y, board)
 {
     stepsSinceBreeding = 0;
 }
 
+/*
+ * Calls the move and bread method for this ant
+ */
+void Ant::step()
+{
+	//todo
+	//move
+	//breed
+}
+
 //Virtual function
-void Ant::Move(Critter *** board, int row, int col)
+void Ant::Move(int row, int col)
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
 	bool moved = true;
@@ -73,8 +89,7 @@ void Ant::Move(Critter *** board, int row, int col)
 /**********************************************************************************************************
 ** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
 **********************************************************************************************************/
-
-void Ant::Breed(Critter *** board, int row, int col)
+void Ant::Breed(int row, int col)
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
 	bool bred = true;
@@ -127,8 +142,4 @@ void Ant::Breed(Critter *** board, int row, int col)
 
 		break;
 	}
-
-
-
-
 }

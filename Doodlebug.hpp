@@ -11,10 +11,11 @@ private:
     char gameBoardCharacter = 'X'; //The doodlebug will have this space in the game
 
 public:
-    Doodlebug(); //Empty constructor
-    virtual void Move(Critter *** board, int row, int col); //Virtual function
-    void Breed(Critter *** board, int row, int col);       //When the ant breeds
-    void Starve(Critter*** board);
+    Doodlebug(int, int, Critter***); //Empty constructor
+    virtual void Move(int row, int col); //Virtual function
+    void Breed(int row, int col);       //When the ant breeds
+    void Starve();
+    void step();
     //char getCharacter(); //Gets the character for the board
 
 };

@@ -1,35 +1,64 @@
 #include "Board.hpp"
+#include "util.hpp"
+#include <iostream>
+#include "Ant.hpp"
+#include "Doodlebug.hpp"
+#include <vector>
 
-//Default constructor that fills the array to 20x20
-Board::Board()
+/*
+ * Default Board:
+ *  rows: 20
+ *  cols: 20
+ *  ants: 100
+ *  doodle: 5
+ */
+Board::Board() : Board(20, 20, 100, 5) { }
+
+/*
+ * Construct custom board
+ *  row: number of rows on the board
+ *  cols: number of columns on the board
+ *  ants: number of ants to start the game with
+ *  doodle: number of doddlebugs to start the game with
+ */
+Board::Board(int r, int c, int a, int d)
 {
-    row = 20; //By default
-    col = 20; //By default
-    ant = 100; //Default number of ants
-    doodle = 5; //Default number of doodles
-
-    //Creating the 20x20 dynamic 2d array below
+    row = r;
+    col = c;
+    ant = a;
+    doodle = d;
+   
+    //Creating the rXc dynamic 2d array below
     board = new Critter ** [row];
     for(int count = 0; count < row; count++)
     {
         board[count] = new Critter*[col];
-    }
-
-    //Setting the critter type chars
-
-	//access violation, not sure how to fill the board with blanks to start.
-	
-	for(int count = 0; count < row; count++)
-	{
-		for(int count2 = 0; count2 < col; count2++)
+        for(int count2 = 0; count2 < col; count2++)
 		{
-			board[count][count2]->setCritterType(' '); //This should print a space in the future -Felicia
+			board[count][count2] = nullptr;
 		}
-	}
-	
+    }
+    
+    placeRandom();
 }
 
-//This will print the board
+Board::~Board()
+{
+    //delete all the critters
+    std::vector<Critter*>* critters = getCritters();
+	for(unsigned int c = 0; c < critters->size(); c++)
+	{
+		delete critters->at(c);
+	}
+	delete critters;
+    
+    //delete board array
+    deleteArray();
+}
+
+/*
+ * Prints the current state of the board to the console
+ */
 void Board::printBoard()
 {
     for(int count = -1; count < row + 1; count++)
@@ -39,19 +68,23 @@ void Board::printBoard()
         {
             if((count != -1) && (count != row)) //This is to allow for a top and bottom border
             {
-                std::cout << board[count][count2]->getCritterType();  //access violation since can't get the board to fill with blanks.  See line 20 -Felicia
-
-                //This if statement allows for the right border to not have a space
-                if(count2 < (col - 1))
+                Critter* critter = board[count][count2];
+                if(critter != nullptr)
+                {
+                    std::cout << critter->getCritterType();
+                }
+                else
                 {
                     std::cout << ' '; 
                 }
+                
             }
 
             else //This will add a dash at the top and bottom of the array
             {
-                std::cout << '-' << ' ';
+                std::cout << '-';
             }
+             
         }
         std::cout << '|'; //right border
         std::cout<<std::endl; //Starting a new line for each row
@@ -61,6 +94,7 @@ void Board::printBoard()
 //This will delete the dynamic array
 void Board::deleteArray()
 {
+    //delete the board array
     for(int count = 0; count < row; count++)
     {
         delete [] board[count];
@@ -68,81 +102,58 @@ void Board::deleteArray()
     delete [] board;
 }
 
-//This will randomly place the ants and doodlebugs
-//For now it will not be random
-//I will add this near the end so we know that it works
+/*
+ * Place inital critters randomly on the board
+ */
 void Board::placeRandom()
 {
+    // Place all the initial ants at random locations
+    for(int a = 0; a < ant; a++)
+    {
+        //find a random point that is not yet occupied
+        int randomRow = -1;
+        int randomCol = -1;
+        do
+        {
+            randomRow = randomBetween(0, row-1);
+            randomCol = randomBetween(0, col-1);
+        }while(board[randomRow][randomCol] != nullptr); //nullprt means no critter is located at that coordinate
+        
+        board[randomRow][randomCol] = new Ant(randomRow, randomCol, board);
+    }
+    
+    // Place all the initial doodlebugs at random locations
+    for(int d = 0; d < doodle; d++)
+    {
+        //find a random point that is not yet occupied
+        int randomRow = -1;
+        int randomCol = -1;
+        do
+        {
+            randomRow = randomBetween(1, row) - 1;
+            randomCol = randomBetween(1, col) - 1;
+        }while(board[randomRow][randomCol] != nullptr); //nullprt means no critter is located at that coordinate
+        
+        board[randomRow][randomCol] = new Doodlebug(randomRow, randomCol, board);
+    }
+}
 
-    //These two for loops will check to make sure that the spaces are not occupied for the doodlebugs
-	for(int count = 0; count < row; count++)
-	{
-		for(int count2 = 0; count2 < col; count2++)
-		{
-            bool doodleFlag = true; //This will be used if a space is occupied;
-            //Adding the doodle bugs to the array
-            while(doodleFlag)
+/*
+ * returns a vector of all critters currently on the board
+ */
+std::vector<Critter*>* Board::getCritters()
+{
+    std::vector<Critter*>* critters = new std::vector<Critter*>();
+    for(int r= 0; r < row; r++)
+    {
+        for(int c = 0; c < col; c++)
+        {
+            Critter* critter = board[r][c];
+            if(critter != nullptr)
             {
-                if(doodle == 0) //if there are no doodlebugs
-                {
-                    goto end;
-                }
-
-                //If the space can be occupied by a critter
-    			if(board[count][count2]->getCritterType() != 'O' && board[count][count2]->getCritterType() != 'X')
-                {
-                    doodle--; //subtracting a doodlebug
-                    doodleFlag = false;
-                    board[count][count2]->setCritterType('X'); //setting the space as a doodlebug
-
-                }
-                else //The space is occupied
-                {
-                    //I will need to call the class to get a new random location
-                    break;
-                }
+                critters->push_back(critter);
             }
-		}
-	}
-
-    end:
-    std::cout << "All of the doodlebugs have been placed" << std::endl;
-
-
-
-     //These two for loops will check to make sure that the spaces are not occupied for the ants
-	for(int count = 0; count < row; count++)
-	{
-		for(int count2 = 0; count2 < col; count2++)
-		{
-            bool antFlag = true; //This will be used if a space is occupied;
-            //Adding the doodle bugs to the array
-            while(antFlag)
-            {
-                //If there are no more ants
-                if(ant == 0)
-                {
-                    goto end2;
-                }
-
-                //If the space can be occupied by a critter
-    			if(board[count][count2]->getCritterType() != 'O' && board[count][count2]->getCritterType() != 'X')
-                {
-                    ant--; //Subtracting an ant;
-                    antFlag = false;
-                    board[count][count2]->setCritterType('O'); //Setting the space as an ant
-
-                }
-                else //The space is occupied
-                {
-                    //I will need to call the class to get a new random location
-                    break;
-                }
-            }
-		}
-	} 
-
-    end2:
-    std::cout << "All of the ants have been placed" << std::endl;
-
+        }
+    }
+    return critters;
 }

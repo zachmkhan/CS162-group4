@@ -1,14 +1,30 @@
 #include "Doodlebug.hpp"
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
+#include "Critter.hpp"
 
+Doodlebug::Doodlebug(int x, int y, Critter*** board) : Critter('X', x, y, board)
+{
+ 
+}
 
-void Doodlebug::Move(Critter *** board,int row, int col)
+/*
+ * Calls the move, bread and starve method for this doodlebug
+ */
+void Doodlebug::step()
+{
+	//todo
+	//move
+	//breed
+	//starve
+}
+
+void Doodlebug::Move(int row, int col)
 {
 	//Tries to go up to eat an ant
 	if (board[xLocation][yLocation + 1]->getCritterType() == 'O')
 	{
-        	board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
+        board[xLocation][yLocation] = board[xLocation][yLocation + 1];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
@@ -93,10 +109,10 @@ void Doodlebug::Move(Critter *** board,int row, int col)
 /**********************************************************************************************************
 ** Description: Ant::Breed creates an ant in a random empty cell ajacent to the ant who calls the function
 **********************************************************************************************************/
-void Doodlebug::Breed(Critter *** board, int row, int col)
+void Doodlebug::Breed(int row, int col)
 {
 	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
-	bool bred = true;
+	// bool bred = true;
 
 	switch (randomMove)
 	{
@@ -142,7 +158,7 @@ void Doodlebug::Breed(Critter *** board, int row, int col)
 ** Description: Function runs through the board objects and deletes any Doodlebugs whose StepsSinceEating
 ** is equal to 3.
 **********************************************************************************************************/
-void Doodlebug::Starve(Critter*** board)
+void Doodlebug::Starve()
 {
     int arraySize = sizeof(board) / sizeof(*board);
     Critter* ptr;
