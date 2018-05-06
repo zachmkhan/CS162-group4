@@ -2,7 +2,7 @@
 
 Critter::Critter(char type, int x, int y, int r, int c, Critter*** board)
 {
-    board = board;
+    this->board = board;
     gameBoardCharacter = type;
     xLocation = x;
     yLocation = y;
