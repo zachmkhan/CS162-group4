@@ -1,3 +1,12 @@
+/*********************************************************************
+** Program name: main.cpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file runs the simulation using functions from
+** the Board class. It also has a function that allows the user to 
+** enter in their own game parameters.
+*********************************************************************/
+
 #include <iostream>
 #include "Board.hpp"
 #include "Validate.hpp"
