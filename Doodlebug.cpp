@@ -27,7 +27,7 @@ void Doodlebug::step()
 void Doodlebug::Move()
 {
 	//Tries to go up to eat an ant
-	if (yLocation < row - 1 && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
+	if (yLocation + 1 < row - 1 && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
 	{
         board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -45,7 +45,7 @@ void Doodlebug::Move()
 		yLocation -= 1;								//The Doodlebug moves down
 	}
 	//Tries to go right to eat an ant
-	else if (xLocation < col - 1 && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
+	else if (xLocation +1 < col - 1 && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
 	{
 		board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
