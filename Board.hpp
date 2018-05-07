@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Board.hpp
+** Author: Group 4
+** Date: 5-6-2018
+** Description: This file declares the variables, functions, 
+** constructors, and destructor used in the Board class.
+*********************************************************************/
+
 #ifndef BOARD_HPP
 #define BOARD_HPP
 #include <iostream>
