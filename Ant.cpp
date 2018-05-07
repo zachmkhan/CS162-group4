@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Ant.cpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file implements the Ant constructor, step, breed
+** and move functions.
+*********************************************************************/
+
 #include "Ant.hpp"
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
@@ -29,7 +37,7 @@ void Ant::step()
  */
 void Ant::Move()
 {
-	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
+	int randomMove = rand() % 4 + 1;				//Random number for the 4 different directions
 
 	switch (randomMove)
 	{
@@ -83,9 +91,13 @@ void Ant::Move()
 		break;
 	}
 
-	stepsSinceBreeding += 1;											//Increment how long since the doodlebug had babies
+	stepsSinceBreeding += 1;					//Increment how long since the doodlebug had babies
 }
 
+/**********************************************************************************************************
+** Description: Ant::breedUp() tests the location above the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
 bool Ant::breedUp()
 {
 	if(yLocation + 1 < col || board[xLocation][yLocation + 1] != nullptr)
@@ -97,6 +109,10 @@ bool Ant::breedUp()
 	return true;
 }
 
+/**********************************************************************************************************
+** Description: Ant::breedDown() tests the location below the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
 bool Ant::breedDown()
 {
 	if(yLocation - 1 >= 0 || board[xLocation][yLocation - 1] != nullptr)
@@ -107,6 +123,10 @@ bool Ant::breedDown()
 	return true;
 }
 
+/**********************************************************************************************************
+** Description: Ant::breedLeft() tests the location to the left of the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
 bool Ant::breedLeft()
 {
 	if((xLocation - 1) < 0 || board[xLocation - 1][yLocation] != nullptr)
@@ -118,6 +138,10 @@ bool Ant::breedLeft()
 	return true;
 }
 
+/**********************************************************************************************************
+** Description: Ant::breedRight() tests the location to the right of the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
 bool Ant::breedRight()
 {
 	if(xLocation + 1 >= row || board[xLocation + 1][yLocation] != nullptr)
@@ -137,7 +161,7 @@ void Ant::Breed()
 {
 	if(stepsSinceBreeding > 3)
 	{
-		int randomMove = randomBetween(1, 4);										//Random number for the 4 different directions
+		int randomMove = randomBetween(1, 4);			//Random number for the 4 different directions
 
 		switch (randomMove)
 		{
