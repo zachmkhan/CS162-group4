@@ -100,7 +100,7 @@ void Ant::Move()
 **********************************************************************************************************/
 bool Ant::breedUp()
 {
-	if(yLocation + 1 < col || board[xLocation][yLocation + 1] != nullptr)
+	if(yLocation + 1 > row || board[xLocation][yLocation + 1] != nullptr)
 	{
 		return false;
 	}
@@ -115,7 +115,7 @@ bool Ant::breedUp()
 **********************************************************************************************************/
 bool Ant::breedDown()
 {
-	if(yLocation - 1 >= 0 || board[xLocation][yLocation - 1] != nullptr)
+	if(yLocation - 1 < 0 || board[xLocation][yLocation - 1] != nullptr)
 	{
 		return false;
 	}
@@ -144,7 +144,7 @@ bool Ant::breedLeft()
 **********************************************************************************************************/
 bool Ant::breedRight()
 {
-	if(xLocation + 1 >= row || board[xLocation + 1][yLocation] != nullptr)
+	if(xLocation + 1 > col || board[xLocation + 1][yLocation] != nullptr)
 	{
 		return false;
 	}
