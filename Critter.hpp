@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Critter.hpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file declares the variables, constructor, and
+** functions used in the Critter class.
+*********************************************************************/
+
 #ifndef CRITTER_HPP_INCLUDED
 #define CRITTER_HPP_INCLUDED
 
