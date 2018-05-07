@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Ant.hpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file declares the variables, constructor, and
+** the functions used in the Ant.cpp class.
+*********************************************************************/
+
 #ifndef ANT_HPP
 #define ANT_HPP
 #include "Critter.hpp"
