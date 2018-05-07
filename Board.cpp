@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Board.cpp
+** Author: Group 4
+** Date: 5-6-2018
+** Description: This file implements the two constructors, destructor,
+** and functions of the Board class.
+*********************************************************************/
+
 #include "Board.hpp"
 #include "util.hpp"
 #include <iostream>
@@ -42,6 +50,7 @@ Board::Board(int r, int c, int a, int d)
     placeRandom();
 }
 
+//Destructor for the Board class
 Board::~Board()
 {
     //delete all the critters
