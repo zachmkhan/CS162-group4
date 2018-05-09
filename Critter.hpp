@@ -19,6 +19,7 @@ class Critter
         int row;
         int col;
         Critter*** board;
+        bool onboard(int, int);
     public:
         Critter(char, int, int, int, int, Critter***);
 		char getCritterType();

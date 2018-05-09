@@ -32,3 +32,10 @@ int Critter::getStepsSinceEating()
 {
     return stepsSinceEating;
 }
+
+
+bool Critter::onboard(int r, int c)
+{
+    return r >= 0 && c >= 0 &&
+        r < row && c < col;
+}

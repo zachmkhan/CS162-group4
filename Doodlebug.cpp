@@ -17,7 +17,7 @@ void Doodlebug::step()
 {
 	Move();
 	Breed();
-	Starve();
+	return Starve();
 }
 
 /*
@@ -27,7 +27,7 @@ void Doodlebug::step()
 void Doodlebug::Move()
 {
 	//Tries to go up to eat an ant
-	if (yLocation + 1 < row - 1 && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
+	if (onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
 	{
         board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -36,7 +36,7 @@ void Doodlebug::Move()
 		yLocation += 1;								//The Doodlebug moves up
 	}
 	//Tries to go down to eat an ant
-	else if (yLocation > 0 && board[xLocation][yLocation - 1] != nullptr && board[xLocation][yLocation - 1]->getCritterType() == 'O')
+	else if (onboard(xLocation, yLocation - 1) && board[xLocation][yLocation - 1] != nullptr && board[xLocation][yLocation - 1]->getCritterType() == 'O')
 	{
 		board[xLocation][yLocation - 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -45,7 +45,7 @@ void Doodlebug::Move()
 		yLocation -= 1;								//The Doodlebug moves down
 	}
 	//Tries to go right to eat an ant
-	else if (xLocation +1 < col - 1 && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
+	else if (onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
 	{
 		board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -54,7 +54,7 @@ void Doodlebug::Move()
 		xLocation += 1;								//The Doodlebug moves right
 	}
 	//Tries to go up to left an ant
-	else if (xLocation > 0 && board[xLocation - 1][yLocation] != nullptr && board[xLocation - 1][yLocation]->getCritterType() == 'O')
+	else if (onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] != nullptr && board[xLocation - 1][yLocation]->getCritterType() == 'O')
 	{
 		board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 		board[xLocation][yLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -70,7 +70,7 @@ void Doodlebug::Move()
 		{
 		//Moving Up
 		case 1:
-			if (yLocation +1 < row && board[xLocation][yLocation + 1] == nullptr)
+			if (onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] == nullptr)
 			{
 				board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
@@ -80,7 +80,7 @@ void Doodlebug::Move()
 			break;
 		//Moving Down
 		case 2:
-			if (yLocation -1 > 0 && board[xLocation][yLocation - 1] == nullptr)
+			if (onboard(xLocation, yLocation - 1) > 0 && board[xLocation][yLocation - 1] == nullptr)
 			{
 				board[xLocation][yLocation - 1] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
@@ -89,7 +89,7 @@ void Doodlebug::Move()
 			break;
 		//Moving Right
 		case 3:
-			if (xLocation +1 < col && board[xLocation + 1][yLocation] == nullptr)
+			if (onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] == nullptr)
 			{
 		
 				board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
@@ -99,7 +99,7 @@ void Doodlebug::Move()
 			break;
 		//Moving Left
 		case 4:
-			if (xLocation-1 > 0 && board[xLocation - 1][yLocation] == nullptr)
+			if (onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] == nullptr)
 			{
 				board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Doodlebug moves to the new space
 				board[xLocation][yLocation] = nullptr;
@@ -114,45 +114,45 @@ void Doodlebug::Move()
 
 bool Doodlebug::breedUp()
 {
-	if(yLocation + 1 < col || board[xLocation][yLocation + 1] != nullptr)
+	if(onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] == nullptr)
 	{
-		return false;
+		board[xLocation][yLocation + 1] = new Doodlebug(xLocation , yLocation + 1, row, col, board);
+		return true;
+		
 	}
+	return false;
 	
-	board[xLocation][yLocation + 1] = new Doodlebug(xLocation , yLocation + 1, row, col, board);
-	return true;
 }
 
 bool Doodlebug::breedDown()
 {
-	if(yLocation - 1 >= 0 || board[xLocation][yLocation - 1] != nullptr)
+	if(onboard(xLocation, yLocation - 1) >= 0 && board[xLocation][yLocation - 1] == nullptr)
 	{
-		return false;
+		board[xLocation][yLocation - 1] = new Doodlebug(xLocation, yLocation - 1, row, col, board);
+		return true;
 	}
-	board[xLocation][yLocation - 1] = new Doodlebug(xLocation, yLocation - 1, row, col, board);
-	return true;
+	return false;
+	
 }
 
 bool Doodlebug::breedLeft()
 {
-	if((xLocation - 1) < 0 || board[xLocation - 1][yLocation] != nullptr)
+	if(onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] == nullptr)
 	{
-		return false;
+		board[xLocation - 1][yLocation] = new Doodlebug(xLocation - 1, yLocation, row, col, board);
+		return true;
 	}
-
-	board[xLocation - 1][yLocation] = new Doodlebug(xLocation - 1, yLocation, row, col, board);
-	return true;
+	return false;
 }
 
 bool Doodlebug::breedRight()
 {
-	if(xLocation + 1 >= row || board[xLocation + 1][yLocation] != nullptr)
+	if(onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] == nullptr)
 	{
-		return false;
+		board[xLocation + 1][yLocation] = new Doodlebug(xLocation + 1, yLocation, row, col, board);
+		return true;
 	}
-	
-	board[xLocation + 1][yLocation] = new Doodlebug(xLocation + 1, yLocation, row, col, board);
-	return true;
+	return false;
 }
 
 
@@ -192,8 +192,8 @@ void Doodlebug::Starve()
 {
 	if(stepsSinceEating >=3)
 	{
-		board[xLocation][yLocation] = NULL;
-		delete this;
+		board[xLocation][yLocation] = nullptr;
+		// delete this; causes error for some reason
 	}
 
 }
