@@ -12,8 +12,8 @@
 class Critter
 {
     protected:
-        int xLocation;
-        int yLocation;
+        int rowLocation;
+        int colLocation;
         int stepsSinceEating;
         char gameBoardCharacter;
         int row;
