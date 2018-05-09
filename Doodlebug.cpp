@@ -35,7 +35,7 @@ void Doodlebug::step()
 void Doodlebug::Move()
 {
 
-	//Tries to go up to eat an ant
+	//Tries to go right to eat an ant
 	if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] != nullptr && board[rowLocation][colLocation + 1]->getCritterType() == 'O')
 	{
 		board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
@@ -44,7 +44,7 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		colLocation = colLocation + 1;								//The Doodlebug moves right
 	}
-	//Tries to go down to eat an ant
+	//Tries to go left to eat an ant
 	else if (onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] != nullptr && board[rowLocation][colLocation - 1]->getCritterType() == 'O')
 	{
 		board[rowLocation][colLocation - 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
@@ -53,7 +53,7 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		colLocation = colLocation - 1;								//The Doodlebug moves left
 	}
-	//Tries to go right to eat an ant
+	//Tries to go down to eat an ant
 	else if (onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] != nullptr && board[rowLocation + 1][colLocation]->getCritterType() == 'O')
 	{
 		board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
@@ -62,7 +62,7 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		rowLocation = rowLocation + 1;								//The Doodlebug moves down
 	}
-	//Tries to go up to left an ant
+	//Tries to go up to eat an ant
 	else if (onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] != nullptr && board[rowLocation - 1][colLocation]->getCritterType() == 'O')
 	{
 		board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
@@ -115,10 +115,6 @@ void Doodlebug::Move()
 				rowLocation -= 1;														//The Doodlebug moves Up
 			}
 			break;
-		default:
-		{
-			std::cout << "I didn't move this time" << std::endl;
-		}
 		}
 		stepsSinceEating += 1;							//Increment how long since the doodlebug has eaten
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
