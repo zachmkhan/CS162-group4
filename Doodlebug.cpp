@@ -34,10 +34,10 @@ void Doodlebug::step()
 */
 void Doodlebug::Move()
 {
-
-	//Tries to go right to eat an ant
+	std::cout << "ROW: " << rowLocation << "     COL: " << colLocation <<std::endl;
 	if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] != nullptr && board[rowLocation][colLocation + 1]->getCritterType() == 'O')
 	{
+		board[rowLocation][colLocation + 1] = nullptr;
 		board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
@@ -47,6 +47,7 @@ void Doodlebug::Move()
 	//Tries to go left to eat an ant
 	else if (onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] != nullptr && board[rowLocation][colLocation - 1]->getCritterType() == 'O')
 	{
+		board[rowLocation][colLocation - 1] = nullptr;
 		board[rowLocation][colLocation - 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
@@ -56,6 +57,7 @@ void Doodlebug::Move()
 	//Tries to go down to eat an ant
 	else if (onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] != nullptr && board[rowLocation + 1][colLocation]->getCritterType() == 'O')
 	{
+		board[rowLocation + 1][colLocation] = nullptr;
 		board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
@@ -65,6 +67,7 @@ void Doodlebug::Move()
 	//Tries to go up to eat an ant
 	else if (onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] != nullptr && board[rowLocation - 1][colLocation]->getCritterType() == 'O')
 	{
+		board[rowLocation - 1][colLocation] = nullptr;
 		board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
 		stepsSinceEating = 0;							//The counter is reset due to the eaten ant
@@ -82,6 +85,7 @@ void Doodlebug::Move()
 			if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 			{
 				board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
+				delete [] **board;
 				board[rowLocation][colLocation] = nullptr;
 
 				colLocation += 1;														//The Doodlebug moves Right
@@ -123,9 +127,10 @@ void Doodlebug::Move()
 
 bool Doodlebug::breedDown()
 {
-	if(onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
+	if(onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] == nullptr)
 	{
-		board[rowLocation][colLocation + 1] = new Doodlebug(rowLocation , colLocation + 1, row, col, board);
+		std::cout << "NEW ALLOCATION BREEDDOWN" << std::endl;
+		board[rowLocation + 1][colLocation] = new Doodlebug(rowLocation + 1, colLocation, row, col, board);
 		return true;
 		
 	}
@@ -135,9 +140,10 @@ bool Doodlebug::breedDown()
 
 bool Doodlebug::breedUp()
 {
-	if(onboard(rowLocation, colLocation - 1) >= 0 && board[rowLocation][colLocation - 1] == nullptr)
+	if(onboard(rowLocation - 1, colLocation) >= 0 && board[rowLocation - 1][colLocation] == nullptr)
 	{
-		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation - 1, row, col, board);
+		std::cout << "NEW ALLOCATION BREEDUP" << std::endl;
+		board[rowLocation - 1][colLocation] = new Doodlebug(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
 	return false;
@@ -145,9 +151,10 @@ bool Doodlebug::breedUp()
 
 bool Doodlebug::breedLeft()
 {
-	if(onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] == nullptr)
+	if(onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] == nullptr)
 	{
-		board[rowLocation - 1][colLocation] = new Doodlebug(rowLocation - 1, colLocation, row, col, board);
+		std::cout << "NEW ALLOCATION BREEDLEFT" << std::endl;
+		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
 
@@ -156,9 +163,10 @@ bool Doodlebug::breedLeft()
 
 bool Doodlebug::breedRight()
 {
-	if(onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] == nullptr)
+	if(onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 	{
-		board[rowLocation + 1][colLocation] = new Doodlebug(rowLocation + 1, colLocation, row, col, board);
+		std::cout << "NEW ALLOCATION BREEDRIGHT" << std::endl;
+		board[rowLocation][colLocation + 1] = new Doodlebug(rowLocation, colLocation + 1, row, col, board);
 		return true;
 	}
 
@@ -172,6 +180,7 @@ void Doodlebug::Breed()
 {
 	if(stepsSinceBreeding > 8)
 	{
+		std::cout << "DOODLEBUG BREED HAS BEEN CALLED" << std::endl;
 		int randomMove = randomBetween(1, 4);										//Random number for the 4 different directions
 
 		switch (randomMove)
@@ -201,6 +210,7 @@ void Doodlebug::Starve()
 {
 	if(stepsSinceEating >=3)
 	{
+		std::cout<<"DOODLEBUG IS GOING TO DIE" << std::endl;
 		board[rowLocation][colLocation] = nullptr;
 		// delete this; causes error for some reason
 	}
