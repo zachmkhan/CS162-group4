@@ -13,7 +13,7 @@
 class Ant : public Critter
 {
     private:
-        int stepsSinceBreeding; //steps since breeding. Will set to 0 in the constructor.
+        int stepsSinceBreeding = 0; //steps since breeding. Will set to 0 in the constructor.
         int stepsNeededToBreed = 3; //Ant will breeed every three steps
         char gameBoardCharacter = 'O'; //The ant will have this space in the game
         bool breedLeft();
