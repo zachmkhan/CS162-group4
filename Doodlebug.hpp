@@ -5,8 +5,8 @@
 class Doodlebug : public Critter
 {
 private:
-    int stepsSinceBreeding; //steps since breeding. Will set to 0 in the constructor.
-    int stepsSinceEating; //steps since eating
+    int stepsSinceBreeding = 0; //steps since breeding. Will set to 0 in the constructor.
+    int stepsSinceEating = 0; //steps since eating
     int stepsNeededToBreed = 8; //Doodlebug will breeed every 8 steps
     char gameBoardCharacter = 'X'; //The doodlebug will have this space in the game
     bool breedLeft();
