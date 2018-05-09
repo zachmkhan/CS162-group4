@@ -44,7 +44,7 @@ void Ant::Move()
 
 		//Moving Right
 	case 1:
-		if (onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] == nullptr)
+		if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 		{
 			board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Ant moves to the new space
 			board[rowLocation][colLocation] = nullptr;
@@ -56,7 +56,7 @@ void Ant::Move()
 
 		//Moving Left
 	case 2:
-		if (onboard(xLocation, yLocation - 1)  && board[xLocation][yLocation - 1] == nullptr)
+		if (onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 		{
 			board[rowLocation][colLocation-1] = board[rowLocation][colLocation];		//The Ant moves to the new space
 			board[rowLocation][colLocation] = nullptr;
@@ -68,7 +68,7 @@ void Ant::Move()
 
 		//Moving Down
 	case 3:
-		if (onboard(xLocation + 1, yLocation)  && board[xLocation + 1][yLocation] == nullptr)
+		if (onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr)
 		{
 			board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
 			board[rowLocation][colLocation] = nullptr;
@@ -80,7 +80,7 @@ void Ant::Move()
 
 		//Moving Up
 	case 4:
-		if (onboard(xLocation - 1, yLocation)  && board[xLocation - 1][yLocation] == nullptr)
+		if (onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
 		{
 			board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
 			board[rowLocation][colLocation] = nullptr;
@@ -100,9 +100,9 @@ void Ant::Move()
 **********************************************************************************************************/
 bool Ant::breedDown()
 {
-	if(onboard(xLocation, yLocation + 1)  && board[xLocation][yLocation + 1] == nullptr) //yLoc +1 row -1 cancel each other out using straight values
+	if(onboard(rowLocation, colLocation + 1)  && board[rowLocation][colLocation + 1] == nullptr) //yLoc +1 row -1 cancel each other out using straight values
 	{
-		board[xLocation][yLocation + 1] = new Ant(xLocation , yLocation + 1, row, col, board);
+		board[rowLocation][colLocation + 1] = new Ant(rowLocation , colLocation + 1, row, col, board);
 		return true;
 	}
 	
@@ -115,9 +115,9 @@ bool Ant::breedDown()
 **********************************************************************************************************/
 bool Ant::breedUp()
 {
-	if(onboard(xLocation, yLocation - 1)  && board[xLocation][yLocation - 1] == nullptr)
+	if(onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 	{
-		board[xLocation][yLocation - 1] = new Ant(xLocation, yLocation - 1, row, col, board);
+		board[rowLocation][colLocation - 1] = new Ant(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
 	return false;
@@ -129,9 +129,9 @@ bool Ant::breedUp()
 **********************************************************************************************************/
 bool Ant::breedLeft()
 {
-	if(onboard(xLocation - 1, yLocation)  && board[xLocation - 1][yLocation] == nullptr)
+	if(onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
 	{
-		board[xLocation - 1][yLocation] = new Ant(xLocation - 1, yLocation, row, col, board);
+		board[rowLocation - 1][colLocation] = new Ant(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
 	return false;
@@ -143,9 +143,10 @@ bool Ant::breedLeft()
 **********************************************************************************************************/
 bool Ant::breedRight()
 {
-	if(onboard(xLocation + 1, yLocation)  && board[xLocation + 1][yLocation] == nullptr) //xLoc+1 col-1 cancel each other out using straight values
+
+	if(onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr) //xLoc+1 col-1 cancel each other out using straight values
 	{
-		board[xLocation + 1][yLocation] = new Ant(xLocation + 1, yLocation, row, col, board);
+		board[rowLocation + 1][colLocation] = new Ant(rowLocation + 1, colLocation, row, col, board);
 		return true;
 	}
 	

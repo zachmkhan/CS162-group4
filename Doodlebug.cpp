@@ -26,13 +26,9 @@ void Doodlebug::step()
 */
 void Doodlebug::Move()
 {
-<<<<<<< HEAD
+
 	//Tries to go up to eat an ant
-	if (onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] != nullptr && board[xLocation][yLocation + 1]->getCritterType() == 'O')
-=======
-	//Tries to go right to eat an ant
-	if (colLocation < col - 1 && board[rowLocation][colLocation + 1] != nullptr && board[rowLocation][colLocation + 1]->getCritterType() == 'O')
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+	if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] != nullptr && board[rowLocation][colLocation + 1]->getCritterType() == 'O')
 	{
 		board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -40,13 +36,8 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		colLocation = colLocation + 1;								//The Doodlebug moves right
 	}
-<<<<<<< HEAD
 	//Tries to go down to eat an ant
-	else if (onboard(xLocation, yLocation - 1) && board[xLocation][yLocation - 1] != nullptr && board[xLocation][yLocation - 1]->getCritterType() == 'O')
-=======
-	//Tries to go left to eat an ant
-	else if (colLocation > 0 && board[rowLocation][colLocation - 1] != nullptr && board[rowLocation][colLocation - 1]->getCritterType() == 'O')
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+	else if (onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] != nullptr && board[rowLocation][colLocation - 1]->getCritterType() == 'O')
 	{
 		board[rowLocation][colLocation - 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -54,13 +45,8 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		colLocation = colLocation - 1;								//The Doodlebug moves left
 	}
-<<<<<<< HEAD
 	//Tries to go right to eat an ant
-	else if (onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] != nullptr && board[xLocation + 1][yLocation]->getCritterType() == 'O')
-=======
-	//Tries to go down to eat an ant
-	else if (rowLocation < row - 1 && board[rowLocation + 1][colLocation] != nullptr && board[rowLocation + 1][colLocation]->getCritterType() == 'O')
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+	else if (onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] != nullptr && board[rowLocation + 1][colLocation]->getCritterType() == 'O')
 	{
 		board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -68,13 +54,8 @@ void Doodlebug::Move()
 		stepsSinceBreeding += 1;						//Increment how long since the doodlebug had babies
 		rowLocation = rowLocation + 1;								//The Doodlebug moves down
 	}
-<<<<<<< HEAD
 	//Tries to go up to left an ant
-	else if (onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] != nullptr && board[xLocation - 1][yLocation]->getCritterType() == 'O')
-=======
-	//Tries to go up to up an ant
-	else if (rowLocation > 0 && board[rowLocation - 1][colLocation] != nullptr && board[rowLocation - 1][colLocation]->getCritterType() == 'O')
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+	else if (onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] != nullptr && board[rowLocation - 1][colLocation]->getCritterType() == 'O')
 	{
 		board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 		board[rowLocation][colLocation] = nullptr;					//The Doodlebug's old space becomes null
@@ -90,11 +71,7 @@ void Doodlebug::Move()
 		{
 			//Moving Right
 		case 1:
-<<<<<<< HEAD
-			if (onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] == nullptr)
-=======
-			if (colLocation < col - 1 && board[rowLocation][colLocation + 1] == nullptr)
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+			if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 			{
 				board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 				board[rowLocation][colLocation] = nullptr;
@@ -104,11 +81,7 @@ void Doodlebug::Move()
 			break;
 			//Moving Left
 		case 2:
-<<<<<<< HEAD
-			if (onboard(xLocation, yLocation - 1) > 0 && board[xLocation][yLocation - 1] == nullptr)
-=======
-			if (colLocation > 0 && board[rowLocation][colLocation - 1] == nullptr)
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+			if (onboard(rowLocation, colLocation - 1) > 0 && board[rowLocation][colLocation - 1] == nullptr)
 			{
 				board[rowLocation][colLocation - 1] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 				board[rowLocation][colLocation] = nullptr;
@@ -117,11 +90,7 @@ void Doodlebug::Move()
 			break;
 			//Moving Down
 		case 3:
-<<<<<<< HEAD
-			if (onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] == nullptr)
-=======
-			if (rowLocation < row - 1 && board[rowLocation + 1][colLocation] == nullptr)
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+			if (onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] == nullptr)
 			{
 
 				board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
@@ -131,11 +100,7 @@ void Doodlebug::Move()
 			break;
 			//Moving Up
 		case 4:
-<<<<<<< HEAD
-			if (onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] == nullptr)
-=======
-			if (rowLocation > 0 && board[rowLocation - 1][colLocation] == nullptr)
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
+			if (onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] == nullptr)
 			{
 				board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Doodlebug moves to the new space
 				board[rowLocation][colLocation] = nullptr;
@@ -154,83 +119,44 @@ void Doodlebug::Move()
 
 bool Doodlebug::breedDown()
 {
-<<<<<<< HEAD
-	if(onboard(xLocation, yLocation + 1) && board[xLocation][yLocation + 1] == nullptr)
+	if(onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 	{
-		board[xLocation][yLocation + 1] = new Doodlebug(xLocation , yLocation + 1, row, col, board);
+		board[rowLocation][colLocation + 1] = new Doodlebug(rowLocation , colLocation + 1, row, col, board);
 		return true;
 		
 	}
 	return false;
 	
-=======
-	if (rowLocation < row - 1 && board[rowLocation + 1][colLocation] == nullptr)
-	{
-		board[rowLocation + 1][colLocation] = new Doodlebug(rowLocation + 1, colLocation, row, col, board);
-		return false;
-	}
-
-	return false;
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
 }
 
 bool Doodlebug::breedUp()
 {
-<<<<<<< HEAD
-	if(onboard(xLocation, yLocation - 1) >= 0 && board[xLocation][yLocation - 1] == nullptr)
+	if(onboard(rowLocation, colLocation - 1) >= 0 && board[rowLocation][colLocation - 1] == nullptr)
 	{
-		board[xLocation][yLocation - 1] = new Doodlebug(xLocation, yLocation - 1, row, col, board);
+		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
 	return false;
-	
-=======
-	if (rowLocation > 0 && board[rowLocation - 1][colLocation] == nullptr)
+}
+
+bool Doodlebug::breedLeft()
+{
+	if(onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] == nullptr)
 	{
 		board[rowLocation - 1][colLocation] = new Doodlebug(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
 
 	return false;
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
-}
-
-bool Doodlebug::breedLeft()
-{
-<<<<<<< HEAD
-	if(onboard(xLocation - 1, yLocation) && board[xLocation - 1][yLocation] == nullptr)
-	{
-		board[xLocation - 1][yLocation] = new Doodlebug(xLocation - 1, yLocation, row, col, board);
-		return true;
-	}
-=======
-	if (colLocation > 0 && board[rowLocation][colLocation - 1] == nullptr)
-	{
-		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation - 1, row, col, board);
-		return true;
-	}
-
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
-	return false;
 }
 
 bool Doodlebug::breedRight()
 {
-<<<<<<< HEAD
-	if(onboard(xLocation + 1, yLocation) && board[xLocation + 1][yLocation] == nullptr)
+	if(onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] == nullptr)
 	{
-		board[xLocation + 1][yLocation] = new Doodlebug(xLocation + 1, yLocation, row, col, board);
+		board[rowLocation + 1][colLocation] = new Doodlebug(rowLocation + 1, colLocation, row, col, board);
 		return true;
 	}
-	return false;
-}
-=======
-	if (colLocation < col - 1 && board[rowLocation][colLocation + 1] == nullptr)
-	{
-		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation + 1, row, col, board);
-		return true;
-	}
->>>>>>> 802417ab49980fad9214752c660d96a8013eac96
 
 	return false;
 }
@@ -271,7 +197,7 @@ void Doodlebug::Starve()
 {
 	if(stepsSinceEating >=3)
 	{
-		board[xLocation][yLocation] = nullptr;
+		board[rowLocation][colLocation] = nullptr;
 		// delete this; causes error for some reason
 	}
 
