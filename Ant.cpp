@@ -2,7 +2,7 @@
 ** Program name: Ant.cpp
 ** Author: Group 4
 ** Date: 5-4-2018
-** Description: This file implements the Ant constructor, step, breed
+** Description: This file implements the Ant constructor, step, breed,
 ** and move functions.
 *********************************************************************/
 
