@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Doodlebug.hpp
+** Author: Group 4
+** Date: 5-9-2018
+** Description: This file declares the variables, constructor, and
+** the functions used in the Doodlebug.cpp class.
+*********************************************************************/
+
 #ifndef DOODLEBUG_HPP_INCLUDED
 #define DOODLEBUG_HPP_INCLUDED
 #include "Critter.hpp"
