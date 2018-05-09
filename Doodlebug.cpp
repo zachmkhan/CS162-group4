@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Doodlebug.cpp
+** Author: Group 4
+** Date: 5-9-2018
+** Description: This file implements the Doodlebug constructor, step, 
+** breed, and move functions.
+*********************************************************************/
+
 #include "Doodlebug.hpp"
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
