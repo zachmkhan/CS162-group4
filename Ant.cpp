@@ -88,7 +88,7 @@ void Ant::Move()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedUp() tests the location above the Ant to see if the Ant can produce
+** Description: Ant::breedDown() tests the location above the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
 bool Ant::breedDown()
@@ -103,7 +103,7 @@ bool Ant::breedDown()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedDown() tests the location below the Ant to see if the Ant can produce
+** Description: Ant::breedUp() tests the location below the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
 bool Ant::breedUp()
