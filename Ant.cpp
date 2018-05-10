@@ -28,6 +28,11 @@ Ant::Ant(int x, int y,int r, int c, Critter*** board) : Critter('O', x, y, r, c,
  */
 void Ant::step()
 {
+	//ant was eaten do not move just return
+	if(board[rowLocation][colLocation]->getCritterType() == 'X') 
+	{
+		return;
+	}
 	Move();
 	Breed();
 }
@@ -46,10 +51,7 @@ void Ant::Move()
 	case 1:
 		if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 		{
-			board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Ant moves to the new space
-			board[rowLocation][colLocation] = nullptr;
-
-			colLocation += 1;														//The Ant moves right
+			move(rowLocation, colLocation, rowLocation, colLocation + 1);//The Ant moves right
 		}
 
 		break;
@@ -58,10 +60,7 @@ void Ant::Move()
 	case 2:
 		if (onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 		{
-			board[rowLocation][colLocation-1] = board[rowLocation][colLocation];		//The Ant moves to the new space
-			board[rowLocation][colLocation] = nullptr;
-
-			colLocation -= 1;														//The Ant moves left
+			move(rowLocation, colLocation, rowLocation, colLocation - 1);//The Ant moves left
 		}
 
 		break;
@@ -70,10 +69,7 @@ void Ant::Move()
 	case 3:
 		if (onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr)
 		{
-			board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
-			board[rowLocation][colLocation] = nullptr;
-
-			rowLocation += 1;														//The Ant moves down
+			move(rowLocation, colLocation, rowLocation + 1, colLocation);//The Ant moves down
 		}
 
 		break;
@@ -82,10 +78,7 @@ void Ant::Move()
 	case 4:
 		if (onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
 		{
-			board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
-			board[rowLocation][colLocation] = nullptr;
-
-			rowLocation -= 1;														//The Ant moves up
+			move(rowLocation, colLocation, rowLocation - 1, colLocation );//The Ant moves up
 		}
 
 		break;

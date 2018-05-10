@@ -70,14 +70,14 @@ Board::~Board()
  */
 void Board::printBoard()
 {
-    for(int count = -1; count < row + 1; count++)
+    for(int r = -1; r < row + 1; r++)
     {
         std::cout << '|'; //left border
-        for(int count2 =  0; count2 < col; count2++)
+        for(int c =  0; c < col; c++)
         {
-            if((count != -1) && (count != row)) //This is to allow for a top and bottom border
+            if((r != -1) && (r != row)) //This is to allow for a top and bottom border
             {
-                Critter* critter = board[count][count2];
+                Critter* critter = board[r][c];
                 if(critter != nullptr)
                 {
                     std::cout << critter->getCritterType();

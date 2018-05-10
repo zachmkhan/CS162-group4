@@ -28,8 +28,6 @@ public:
     void Breed();       //When the ant breeds
     void Starve();
     void step();
-    //char getCharacter(); //Gets the character for the board
-
 };
 
 #endif // DOODLEBUG_HPP_INCLUDED

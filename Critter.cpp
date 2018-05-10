@@ -5,7 +5,7 @@
 ** Description: This file implements the constructor and functions
 ** of the Critter class.
 *********************************************************************/
-
+#include <iostream>
 #include "Critter.hpp"
 
 Critter::Critter(char type, int x, int y, int r, int c, Critter*** board)
@@ -23,19 +23,30 @@ char Critter::getCritterType()
 	return gameBoardCharacter;
 }
 
-void Critter::setCritterType(char typeChar)
-{
-	gameBoardCharacter = typeChar;
-}
-
-int Critter::getStepsSinceEating()
-{
-    return stepsSinceEating;
-}
-
-
 bool Critter::onboard(int r, int c)
 {
     return r >= 0 && c >= 0 &&
         r < row && c < col;
+}
+
+int Critter::getCol()
+{
+    return colLocation;
+}
+
+int Critter::getRow()
+{
+    return rowLocation;
+}
+
+void Critter::move(int oldRow, int oldCol, int newRow, int newCol)
+{
+    if(board[newRow][newCol] != nullptr)
+    {
+        board[newRow][newCol] = nullptr;
+    }
+    board[newRow][newCol] = board[oldRow][oldCol];
+    board[oldRow][oldCol] = nullptr;
+    rowLocation = newRow;
+    colLocation = newCol;
 }

@@ -14,7 +14,6 @@ class Critter
     protected:
         int rowLocation;
         int colLocation;
-        int stepsSinceEating;
         char gameBoardCharacter;
         int row;
         int col;
@@ -22,11 +21,12 @@ class Critter
         bool onboard(int, int);
     public:
         Critter(char, int, int, int, int, Critter***);
-		char getCritterType();
-		int getStepsSinceEating();
-		void setCritterType(char);
+		virtual char getCritterType();
+		int getCol();
+		int getRow();
         virtual void Move() = 0;
         virtual void step() = 0;
+        void move(int oldRow, int oldCol, int newRow, int newCol);
 };
 
 #endif // CRITTER_HPP_INCLUDED
