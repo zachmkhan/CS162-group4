@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Ant.cpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file implements the Ant constructor, step, breed,
+** and move functions.
+*********************************************************************/
+
 #include "Ant.hpp"
 #include <ctime>					// For time()
 #include <cstdlib>					// For srand() and rand()
@@ -29,104 +37,141 @@ void Ant::step()
  */
 void Ant::Move()
 {
-	int randomMove = rand() % 4 + 1;										//Random number for the 4 different directions
+	int randomMove = rand() % 4 + 1;				//Random number for the 4 different directions
 
 	switch (randomMove)
 	{
 
-		//Moving Up
-	case 1:
-		if (yLocation < row - 1 && board[xLocation][yLocation + 1] == nullptr)
-		{
-			board[xLocation][yLocation + 1] = board[xLocation][yLocation];		//The Ant moves to the new space
-			board[xLocation][yLocation] = nullptr;
-
-			yLocation += 1;														//The Ant moves up
-		}
-
-		break;
-
-		//Moving Down
-	case 2:
-		if (yLocation > 0 && board[xLocation][yLocation - 1] == nullptr)
-		{
-			board[xLocation][yLocation-1] = board[xLocation][yLocation];		//The Ant moves to the new space
-			board[xLocation][yLocation] = nullptr;
-
-			yLocation -= 1;														//The Ant moves down
-		}
-
-		break;
-
 		//Moving Right
-	case 3:
-		if (xLocation < col - 1 && board[xLocation + 1][yLocation] == nullptr)
+	case 1:
+		if (onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 		{
-			board[xLocation + 1][yLocation] = board[xLocation][yLocation];		//The Ant moves to the new space
-			board[xLocation][yLocation] = nullptr;
-
-			xLocation += 1;														//The Ant moves right
+			board[rowLocation][colLocation + 1] = board[rowLocation][colLocation];		//The Ant moves to the new space
+			board[rowLocation][colLocation] = nullptr;
+			std::cout << "Ant Old Row " << rowLocation << " Old Column " << colLocation << std::endl;
+			colLocation += 1;														//The Ant moves right
+			std::cout << "Row " << rowLocation << " Column " << colLocation << std::endl;
+		}
+		else
+		{
+			std::cout << "Ant can't move right" << std::endl;
 		}
 
 		break;
 
 		//Moving Left
-	case 4:
-		if (xLocation > 0 && board[xLocation - 1][yLocation] == nullptr)
+	case 2:
+		if (onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 		{
-			board[xLocation - 1][yLocation] = board[xLocation][yLocation];		//The Ant moves to the new space
-			board[xLocation][yLocation] = nullptr;
+			board[rowLocation][colLocation-1] = board[rowLocation][colLocation];		//The Ant moves to the new space
+			board[rowLocation][colLocation] = nullptr;
+			std::cout << "Ant Old Row " << rowLocation << " Old Column " << colLocation << std::endl;
+			colLocation -= 1;														//The Ant moves left
+			std::cout << "Row " << rowLocation << " Column " << colLocation << std::endl;
+		}
+		else
+		{
+			std::cout << "Ant can't move left" << std::endl;
+		}
 
-			xLocation -= 1;														//The Ant moves left
+		break;
+
+		//Moving Down
+	case 3:
+		if (onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr)
+		{
+			board[rowLocation + 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
+			board[rowLocation][colLocation] = nullptr;
+			std::cout << "Ant Old Row " << rowLocation << " Old Column " << colLocation << std::endl;
+			rowLocation += 1;														//The Ant moves down
+			std::cout << "Row " << rowLocation << " Column " << colLocation << std::endl;
+		}
+		else
+		{
+			std::cout << "Ant can't move down" << std::endl;
+		}
+
+		break;
+
+		//Moving Up
+	case 4:
+		if (onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
+		{
+			board[rowLocation - 1][colLocation] = board[rowLocation][colLocation];		//The Ant moves to the new space
+			board[rowLocation][colLocation] = nullptr;
+			std::cout << "Ant Old Row " << rowLocation << " Old Column " << colLocation << std::endl;
+			rowLocation -= 1;														//The Ant moves up
+			std::cout << "Row " << rowLocation << " Column " << colLocation << std::endl;
+		}
+		else
+		{
+			std::cout << "Ant can't move up" << std::endl;
 		}
 
 		break;
 	}
 
-	stepsSinceBreeding += 1;											//Increment how long since the doodlebug had babies
+	stepsSinceBreeding += 1; //Increment how long since the doodlebug had babies
+	std::cout << "Steps Since Breeding " << stepsSinceBreeding << std::endl;
 }
 
-bool Ant::breedUp()
-{
-	if(yLocation + 1 < col || board[xLocation][yLocation + 1] != nullptr)
-	{
-		return false;
-	}
-	
-	board[xLocation][yLocation + 1] = new Ant(xLocation , yLocation + 1, row, col, board);
-	return true;
-}
-
+/**********************************************************************************************************
+** Description: Ant::breedUp() tests the location above the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
 bool Ant::breedDown()
 {
-	if(yLocation - 1 >= 0 || board[xLocation][yLocation - 1] != nullptr)
+	if(onboard(rowLocation, colLocation + 1)  && board[rowLocation][colLocation + 1] == nullptr) //yLoc +1 row -1 cancel each other out using straight values
 	{
-		return false;
-	}
-	board[xLocation][yLocation - 1] = new Ant(xLocation, yLocation - 1, row, col, board);
-	return true;
-}
-
-bool Ant::breedLeft()
-{
-	if((xLocation - 1) < 0 || board[xLocation - 1][yLocation] != nullptr)
-	{
-		return false;
-	}
-
-	board[xLocation - 1][yLocation] = new Ant(xLocation - 1, yLocation, row, col, board);
-	return true;
-}
-
-bool Ant::breedRight()
-{
-	if(xLocation + 1 >= row || board[xLocation + 1][yLocation] != nullptr)
-	{
-		return false;
+		board[rowLocation][colLocation + 1] = new Ant(rowLocation , colLocation + 1, row, col, board);
+		return true;
 	}
 	
-	board[xLocation + 1][yLocation] = new Ant(xLocation + 1, yLocation, row, col, board);
-	return true;
+	return false;
+}
+
+/**********************************************************************************************************
+** Description: Ant::breedDown() tests the location below the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
+bool Ant::breedUp()
+{
+	if(onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
+	{
+		board[rowLocation][colLocation - 1] = new Ant(rowLocation, colLocation - 1, row, col, board);
+		return true;
+	}
+	return false;
+}
+
+/**********************************************************************************************************
+** Description: Ant::breedLeft() tests the location to the left of the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
+bool Ant::breedLeft()
+{
+	if(onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
+	{
+		board[rowLocation - 1][colLocation] = new Ant(rowLocation - 1, colLocation, row, col, board);
+		return true;
+	}
+	return false;
+}
+
+/**********************************************************************************************************
+** Description: Ant::breedRight() tests the location to the right of the Ant to see if the Ant can produce
+** a new Ant in that location. If it is null, a new ant is created at the location.
+**********************************************************************************************************/
+bool Ant::breedRight()
+{
+
+	if(onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr) //xLoc+1 col-1 cancel each other out using straight values
+	{
+		board[rowLocation + 1][colLocation] = new Ant(rowLocation + 1, colLocation, row, col, board);
+		return true;
+	}
+	
+	return false;
 }
 
 
@@ -137,7 +182,7 @@ void Ant::Breed()
 {
 	if(stepsSinceBreeding > 3)
 	{
-		int randomMove = randomBetween(1, 4);										//Random number for the 4 different directions
+		int randomMove = randomBetween(1, 4);			//Random number for the 4 different directions
 
 		switch (randomMove)
 		{

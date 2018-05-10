@@ -1,3 +1,10 @@
+/*********************************************************************
+** Program name: util.hpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file declares the functions that are used for
+** input validation in the program.
+*********************************************************************/
 #include <string>
 #ifndef UTIL_HPP
 #define UTIL_HPP

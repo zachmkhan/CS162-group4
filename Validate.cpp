@@ -26,6 +26,7 @@ void Validate(int &input, int minimum, int max)
             if(input == count)
             {
                 v = false; //breaks out of the while loop
+                std::cin.ignore();
                 break;
             }
 

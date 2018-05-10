@@ -1,3 +1,11 @@
+/*********************************************************************
+** Program name: Ant.hpp
+** Author: Group 4
+** Date: 5-4-2018
+** Description: This file declares the variables, constructor, and
+** the functions used in the Ant.cpp class.
+*********************************************************************/
+
 #ifndef ANT_HPP
 #define ANT_HPP
 #include "Critter.hpp"
@@ -5,7 +13,7 @@
 class Ant : public Critter
 {
     private:
-        int stepsSinceBreeding; //steps since breeding. Will set to 0 in the constructor.
+        int stepsSinceBreeding = 0; //steps since breeding. Will set to 0 in the constructor.
         int stepsNeededToBreed = 3; //Ant will breeed every three steps
         char gameBoardCharacter = 'O'; //The ant will have this space in the game
         bool breedLeft();
