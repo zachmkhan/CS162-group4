@@ -251,7 +251,7 @@ void Doodlebug::Starve()
 		std::cout<<"DOODLEBUG IS GOING TO DIE" << std::endl;
 		std::cout << "Row " << rowLocation << " Column " << colLocation << std::endl;
 		delete board[rowLocation][colLocation];
-		board[rowLocation][colLocation] = nullptr;
+		//board[rowLocation][colLocation] = nullptr;
 		// delete this; causes error for some reason
 	}
 
