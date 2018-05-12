@@ -43,10 +43,21 @@ void Critter::move(int oldRow, int oldCol, int newRow, int newCol)
 {
     if(board[newRow][newCol] != nullptr)
     {
+        board[newRow][newCol]->deleteCritter();
         board[newRow][newCol] = nullptr;
     }
     board[newRow][newCol] = board[oldRow][oldCol];
     board[oldRow][oldCol] = nullptr;
     rowLocation = newRow;
     colLocation = newCol;
+}
+
+bool Critter::isDeleted()
+{
+    return deleted;
+}
+
+bool Critter::deleteCritter()
+{
+    deleted = true;
 }

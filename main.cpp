@@ -42,7 +42,19 @@ int main()
 			std::vector<Critter*>* critters = board->getCritters();
 			for(unsigned int c = 0; c < critters->size(); c++)
 			{
-				critters->at(c)->step();
+				if(!critters->at(c)->isDeleted())
+				{
+					critters->at(c)->step();
+				}
+			}
+			
+			for(unsigned int c = 0; c < critters->size(); c++)
+			{
+				if(critters->at(c)->isDeleted())
+				{
+					delete critters->at(c);
+					// delete c;
+				}
 			}
 			delete critters;
 			

@@ -103,8 +103,10 @@ void Doodlebug::Move()
 
 bool Doodlebug::breedDown()
 {
+	
 	if(onboard(rowLocation + 1, colLocation) && board[rowLocation + 1][colLocation] == nullptr)
 	{
+		std::cout << rowLocation + 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation + 1][colLocation] = new Doodlebug(rowLocation + 1, colLocation, row, col, board);
 		return true;
 	}
@@ -114,8 +116,10 @@ bool Doodlebug::breedDown()
 
 bool Doodlebug::breedUp()
 {
+	
 	if(onboard(rowLocation - 1, colLocation) >= 0 && board[rowLocation - 1][colLocation] == nullptr)
 	{
+		std::cout << rowLocation - 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation - 1][colLocation] = new Doodlebug(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
@@ -124,8 +128,10 @@ bool Doodlebug::breedUp()
 
 bool Doodlebug::breedLeft()
 {
+	
 	if(onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] == nullptr)
 	{
+		std::cout << rowLocation << " " << colLocation - 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation - 1] = new Doodlebug(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
@@ -137,6 +143,7 @@ bool Doodlebug::breedRight()
 {
 	if(onboard(rowLocation, colLocation + 1) && board[rowLocation][colLocation + 1] == nullptr)
 	{
+		std::cout << rowLocation << " " << colLocation + 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation + 1] = new Doodlebug(rowLocation, colLocation + 1, row, col, board);
 		return true;
 	}
@@ -181,6 +188,6 @@ void Doodlebug::Starve()
 	if(stepsSinceEating >=3)
 	{
 		board[rowLocation][colLocation] = nullptr;
-		delete this;
+		deleteCritter(); // marks for deletion after the turn ends
 	}
 }

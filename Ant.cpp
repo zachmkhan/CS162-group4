@@ -29,7 +29,7 @@ Ant::Ant(int x, int y,int r, int c, Critter*** board) : Critter('O', x, y, r, c,
 void Ant::step()
 {
 	//ant was eaten do not move just return
-	if(board[rowLocation][colLocation]->getCritterType() == 'X') 
+	if(isDeleted()) 
 	{
 		return;
 	}
@@ -95,6 +95,7 @@ bool Ant::breedDown()
 {
 	if(onboard(rowLocation, colLocation + 1)  && board[rowLocation][colLocation + 1] == nullptr) //yLoc +1 row -1 cancel each other out using straight values
 	{
+		std::cout << rowLocation << " " << colLocation + 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation + 1] = new Ant(rowLocation , colLocation + 1, row, col, board);
 		return true;
 	}
@@ -110,6 +111,7 @@ bool Ant::breedUp()
 {
 	if(onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 	{
+		std::cout << rowLocation << " " << colLocation - 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation - 1] = new Ant(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
@@ -124,6 +126,7 @@ bool Ant::breedLeft()
 {
 	if(onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
 	{
+		std::cout << rowLocation - 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation - 1][colLocation] = new Ant(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
@@ -139,6 +142,7 @@ bool Ant::breedRight()
 
 	if(onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr) //xLoc+1 col-1 cancel each other out using straight values
 	{
+		std::cout << rowLocation + 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation + 1][colLocation] = new Ant(rowLocation + 1, colLocation, row, col, board);
 		return true;
 	}
