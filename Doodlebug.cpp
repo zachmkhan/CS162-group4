@@ -76,7 +76,7 @@ void Doodlebug::Move()
 			break;
 			//Moving Left
 		case 2:
-			if (onboard(rowLocation, colLocation - 1) > 0 && board[rowLocation][colLocation - 1] == nullptr)
+			if (onboard(rowLocation, colLocation - 1) && board[rowLocation][colLocation - 1] == nullptr)
 			{													//The Doodlebug moves Left
 				move(rowLocation, colLocation, rowLocation, colLocation-1);
 			}
@@ -116,7 +116,7 @@ bool Doodlebug::breedDown()
 bool Doodlebug::breedUp()
 {
 	
-	if(onboard(rowLocation - 1, colLocation) >= 0 && board[rowLocation - 1][colLocation] == nullptr)
+	if(onboard(rowLocation - 1, colLocation) && board[rowLocation - 1][colLocation] == nullptr)
 	{
 		board[rowLocation - 1][colLocation] = new Doodlebug(rowLocation - 1, colLocation, row, col, board);
 		return true;
