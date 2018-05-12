@@ -25,6 +25,5 @@ class Ant : public Critter
         void Move();
         void Breed();       //When the ant breeds
         void step();
-        //char getCharacter(); //Gets the character for the board
 };
 #endif

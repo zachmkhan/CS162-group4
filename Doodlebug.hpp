@@ -24,7 +24,7 @@ private:
 
 public:
     Doodlebug(int, int, int, int, Critter***); //Empty constructor
-    virtual void Move(); //Virtual function
+    void Move(); //Virtual function
     void Breed();       //When the ant breeds
     void Starve();
     void step();

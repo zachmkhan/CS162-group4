@@ -11,6 +11,7 @@
 #include "Board.hpp"
 #include "Validate.hpp"
 #include "util.hpp"
+#include "Critter.hpp"
 #include <vector>
 
 using std::cout;
@@ -53,7 +54,6 @@ int main()
 				if(critters->at(c)->isDeleted())
 				{
 					delete critters->at(c);
-					// delete c;
 				}
 			}
 			delete critters;

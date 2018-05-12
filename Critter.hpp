@@ -18,6 +18,7 @@ class Critter
         int row;
         int col;
         bool deleted = false;
+        bool newCritter = true;
         Critter*** board;
         bool onboard(int, int);
        
@@ -26,11 +27,12 @@ class Critter
 		virtual char getCritterType();
 		int getCol();
 		int getRow();
-        virtual void Move() = 0;
         virtual void step() = 0;
         void move(int oldRow, int oldCol, int newRow, int newCol);
         bool isDeleted();
-         bool deleteCritter();
+        bool deleteCritter();
+        bool isNew();
+        bool setNew(bool);
 };
 
 #endif // CRITTER_HPP_INCLUDED

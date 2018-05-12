@@ -88,14 +88,13 @@ void Ant::Move()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedDown() tests the location above the Ant to see if the Ant can produce
+** Description: Ant::breedRight() tests the location right of the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
-bool Ant::breedDown()
+bool Ant::breedRight()
 {
 	if(onboard(rowLocation, colLocation + 1)  && board[rowLocation][colLocation + 1] == nullptr) //yLoc +1 row -1 cancel each other out using straight values
 	{
-		std::cout << rowLocation << " " << colLocation + 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation + 1] = new Ant(rowLocation , colLocation + 1, row, col, board);
 		return true;
 	}
@@ -104,14 +103,13 @@ bool Ant::breedDown()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedUp() tests the location below the Ant to see if the Ant can produce
+** Description: Ant::breedLeft() tests the location left of the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
-bool Ant::breedUp()
+bool Ant::breedLeft()
 {
 	if(onboard(rowLocation, colLocation - 1)  && board[rowLocation][colLocation - 1] == nullptr)
 	{
-		std::cout << rowLocation << " " << colLocation - 1 << " " << row << " " << col << std::endl;
 		board[rowLocation][colLocation - 1] = new Ant(rowLocation, colLocation - 1, row, col, board);
 		return true;
 	}
@@ -119,14 +117,13 @@ bool Ant::breedUp()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedLeft() tests the location to the left of the Ant to see if the Ant can produce
+** Description: Ant::breedUp() tests the location above the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
-bool Ant::breedLeft()
+bool Ant::breedUp()
 {
 	if(onboard(rowLocation - 1, colLocation)  && board[rowLocation - 1][colLocation] == nullptr)
 	{
-		std::cout << rowLocation - 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation - 1][colLocation] = new Ant(rowLocation - 1, colLocation, row, col, board);
 		return true;
 	}
@@ -134,15 +131,14 @@ bool Ant::breedLeft()
 }
 
 /**********************************************************************************************************
-** Description: Ant::breedRight() tests the location to the right of the Ant to see if the Ant can produce
+** Description: Ant::breedDown() tests the location below the Ant to see if the Ant can produce
 ** a new Ant in that location. If it is null, a new ant is created at the location.
 **********************************************************************************************************/
-bool Ant::breedRight()
+bool Ant::breedDown()
 {
 
 	if(onboard(rowLocation + 1, colLocation)  && board[rowLocation + 1][colLocation] == nullptr) //xLoc+1 col-1 cancel each other out using straight values
 	{
-		std::cout << rowLocation + 1 << " " << colLocation << " " << row << " " << col << std::endl;
 		board[rowLocation + 1][colLocation] = new Ant(rowLocation + 1, colLocation, row, col, board);
 		return true;
 	}

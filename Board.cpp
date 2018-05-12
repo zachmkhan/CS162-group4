@@ -160,6 +160,7 @@ std::vector<Critter*>* Board::getCritters()
             Critter* critter = board[r][c];
             if(critter != nullptr)
             {
+                critter->setNew(false);
                 critters->push_back(critter);
             }
         }
